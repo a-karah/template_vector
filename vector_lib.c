@@ -1,8 +1,8 @@
 #include <vector_lib.h>
 
-size_t	find_max_bit(size_t num)
+size_t find_max_bit(size_t num)
 {
-	size_t	max;
+	size_t max;
 
 	max = 0;
 	while (num)
@@ -13,25 +13,12 @@ size_t	find_max_bit(size_t num)
 	return (max);
 }
 
-size_t	vector_len(void *vector[])
-{
-	size_t	i;
-
-	if (vector == NULL)
-		return (0);
-	i = 0;
-	while (vector[i] != NULL)
-		++i;
-	return (i);
-}
-
-int	vector_shift_right(void *vector[], size_t len, size_t n)
+int vector_shift_right(vector_t vector[], size_t len, size_t n)
 {
 	if (vector == NULL)
 		return (-1);
 	if (n == 0)
 		return (0);
-	vector[len + n] = NULL;
 	while (len)
 	{
 		--len;
@@ -40,9 +27,9 @@ int	vector_shift_right(void *vector[], size_t len, size_t n)
 	return (0);
 }
 
-int	vector_shift_left(void *vector[], size_t len, size_t n)
+int vector_shift_left(vector_t vector[], size_t len, size_t n)
 {
-	size_t	i;
+	size_t i;
 
 	if (vector == NULL || len < n)
 		return (-1);
@@ -54,13 +41,12 @@ int	vector_shift_left(void *vector[], size_t len, size_t n)
 		vector[i] = vector[i + n];
 		++i;
 	}
-	vector[i] = NULL;
 	return (0);
 }
 
-int	vector_destroy(void *vector[], void (*del)(void *), size_t len)
+int vector_destroy(vector_t vector[], void (*del)(vector_t), size_t len)
 {
-	size_t	i;
+	size_t i;
 
 	if (vector == NULL)
 		return (-1);
@@ -77,10 +63,10 @@ int	vector_destroy(void *vector[], void (*del)(void *), size_t len)
 	return (0);
 }
 
-int	vector_reverse_all(void *vector[], size_t len)
+int vector_reverse_all(vector_t vector[], size_t len)
 {
-	size_t	i;
-	void	*tmp;
+	size_t i;
+	vector_t tmp;
 
 	if (vector == NULL)
 		return (-1);
@@ -97,29 +83,29 @@ int	vector_reverse_all(void *vector[], size_t len)
 	return (0);
 }
 
-void	**vector_expand(void *vector[], size_t expansion_len)
+void **vector_expand(vector_t vector[], size_t expansion_len)
 {
-	void	**tmp;
-	size_t	i;
+	vector_t *tmp;
+	size_t i;
 
 	if (vector == NULL)
 		return (NULL);
-	tmp = malloc(sizeof(void *) * (expansion_len + 1));
+	tmp = malloc(sizeof(vector_t) * (expansion_len));
 	if (tmp == NULL)
 		return (NULL);
 	i = 0;
-	while (i < expansion_len + 1)
+	while (i < expansion_len)
 	{
-		tmp[i] = NULL;
+		tmp[i] = 0;
 		++i;
 	}
-	vector_copy_addr_n(tmp, vector, expansion_len);
+	vector_copy_value_n(tmp, vector, expansion_len);
 	return (tmp);
 }
 
-void	**vector_copy_addr_n(void *dest[], void *src[], size_t n)
+void **vector_copy_value_n(vector_t dest[], vector_t src[], size_t n)
 {
-	size_t	i;
+	size_t i;
 
 	if (dest == NULL || src == NULL || !n)
 		return (NULL);
@@ -129,13 +115,12 @@ void	**vector_copy_addr_n(void *dest[], void *src[], size_t n)
 		dest[i] = src[i];
 		++i;
 	}
-	dest[i] = NULL;
 	return (dest);
 }
 
-void	**vector_deep_copy_n(void *dest[], void *src[], void *(*copy)(void *), size_t n)
+void **vector_deep_copy_n(vector_t dest[], vector_t src[], vector_t (*copy)(vector_t), size_t n)
 {
-	size_t	i;
+	size_t i;
 
 	if (dest == NULL || src == NULL || !n || copy == NULL)
 		return (NULL);
@@ -145,13 +130,12 @@ void	**vector_deep_copy_n(void *dest[], void *src[], void *(*copy)(void *), size
 		dest[i] = copy(src[i]);
 		++i;
 	}
-	dest[i] = NULL;
 	return (dest);
 }
 
-int	vector_del_n(void *vector[], size_t len, void (*del)(void *), size_t n)
+int vector_del_n(vector_t vector[], size_t len, void (*del)(vector_t), size_t n)
 {
-	size_t	i;
+	size_t i;
 
 	if (vector == NULL)
 		return (-1);
@@ -167,21 +151,20 @@ int	vector_del_n(void *vector[], size_t len, void (*del)(void *), size_t n)
 	return (vector_shift_left(vector, len, i));
 }
 
-int	vector_insert(void *vector[], size_t len, void *addr)
+int vector_insert(vector_t vector[], size_t len, vector_t value)
 {
-	if (vector == NULL || addr == NULL)
+	if (vector == NULL)
 		return (-1);
 	vector_shift_right(vector, len, 1);
-	vector[0] = addr;
+	vector[0] = value;
 	return (0);
 }
 
-int	vector_insert_vector_n(void *vector[], size_t len, void *addr[], size_t n)
+int vector_insert_vector_n(vector_t vector[], size_t len, vector_t value[], size_t n)
 {
-	if (vector == NULL || addr == NULL || !n)
+	if (vector == NULL || !n)
 		return (-1);
 	vector_shift_right(vector, len, n);
-	vector_copy_addr_n(vector, addr, n);
+	vector_copy_value_n(vector, value, n);
 	return (0);
 }
-
