@@ -21,7 +21,6 @@
     int  BEGIN_NAME##tempv_del_all(BEGIN_NAME##tempv_t *tempv, void (*del)(type));                                     \
                                                                                                                        \
     int  BEGIN_NAME##tempv_check_capacity(BEGIN_NAME##tempv_t *tempv, size_t len);                                     \
-    int  BEGIN_NAME##tempv_is_unique(BEGIN_NAME##tempv_t *tempv, type value);                                          \
     int  BEGIN_NAME##tempv_reverse(BEGIN_NAME##tempv_t *tempv);                                                        \
                                                                                                                        \
     int  BEGIN_NAME##tempv_insert(BEGIN_NAME##tempv_t *tempv, size_t index, type value);                               \
@@ -173,19 +172,6 @@
             return (tmp);                                                                                              \
         }                                                                                                              \
         return ((type){0});                                                                                            \
-    }                                                                                                                  \
-                                                                                                                       \
-    int BEGIN_NAME##tempv_is_unique(BEGIN_NAME##tempv_t *tempv, type value)                                            \
-    {                                                                                                                  \
-        size_t i;                                                                                                      \
-                                                                                                                       \
-        if (tempv == NULL)                                                                                             \
-            return (0);                                                                                                \
-        i = 0;                                                                                                         \
-        while (i < tempv->len)                                                                                         \
-            if (tempv->vector[i++] == value)                                                                           \
-                return (0);                                                                                            \
-        return (1);                                                                                                    \
     }                                                                                                                  \
                                                                                                                        \
     int BEGIN_NAME##tempv_check_capacity(BEGIN_NAME##tempv_t *tempv, size_t len)                                       \

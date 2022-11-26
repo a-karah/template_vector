@@ -112,7 +112,7 @@
         i = 0;                                                                                                         \
         while (i < expansion_len)                                                                                      \
         {                                                                                                              \
-            tmp[i] = 0;                                                                                                \
+            tmp[i] = (vector_t){0};                                                                                    \
             ++i;                                                                                                       \
         }                                                                                                              \
         BEGIN_NAME##vector_copy_value_n(tmp, vector, expansion_len);                                                   \
