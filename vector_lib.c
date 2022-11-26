@@ -83,7 +83,7 @@ int vector_reverse_all(vector_t vector[], size_t len)
 	return (0);
 }
 
-void **vector_expand(vector_t vector[], size_t expansion_len)
+vector_t	*vector_expand(vector_t vector[], size_t expansion_len)
 {
 	vector_t *tmp;
 	size_t i;
@@ -103,7 +103,7 @@ void **vector_expand(vector_t vector[], size_t expansion_len)
 	return (tmp);
 }
 
-void **vector_copy_value_n(vector_t dest[], vector_t src[], size_t n)
+vector_t	*vector_copy_value_n(vector_t dest[], vector_t src[], size_t n)
 {
 	size_t i;
 
@@ -118,7 +118,7 @@ void **vector_copy_value_n(vector_t dest[], vector_t src[], size_t n)
 	return (dest);
 }
 
-void **vector_deep_copy_n(vector_t dest[], vector_t src[], vector_t (*copy)(vector_t), size_t n)
+vector_t	*vector_deep_copy_n(vector_t dest[], vector_t src[], vector_t (*copy)(vector_t), size_t n)
 {
 	size_t i;
 
