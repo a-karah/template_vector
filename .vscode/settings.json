@@ -16,6 +16,17 @@
         "tuple": "c",
         "utility": "c",
         "vector": "c",
-        "iosfwd": "c"
+        "iosfwd": "c",
+        "__bit_reference": "c",
+        "__node_handle": "c",
+        "atomic": "c",
+        "bitset": "c",
+        "__memory": "c",
+        "locale": "c",
+        "optional": "c",
+        "system_error": "c",
+        "__split_buffer": "c",
+        "string": "c",
+        "a": "cpp"
     }
 }
