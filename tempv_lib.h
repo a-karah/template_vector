@@ -29,7 +29,7 @@
     type BEGIN_NAME##tempv_pull(BEGIN_NAME##tempv_t *tempv);                                                           \
                                                                                                                        \
     int  BEGIN_NAME##tempv_try(BEGIN_NAME##tempv_t *tempv, type value, size_t index, int (*fptr)(type, type));         \
-    BEGIN_NAME##tempv_t *BEGIN_NAME##tempv_splice(BEGIN_NAME##tempv_t *tempv, size_t index, size_t n);                 \
+    BEGIN_NAME##tempv_t *BEGIN_NAME##tempv_cut(BEGIN_NAME##tempv_t *tempv, size_t index, size_t n);                 \
     BEGIN_NAME##tempv_t *BEGIN_NAME##tempv_new(type vector[], size_t n, type (*fptr)(type));                           \
     int                  BEGIN_NAME##tempv_destroy(BEGIN_NAME##tempv_t *tempv, void (*del)(type));
 
@@ -60,7 +60,7 @@
         return (-1);                                                                                                   \
     }                                                                                                                  \
                                                                                                                        \
-    BEGIN_NAME##tempv_t *BEGIN_NAME##tempv_splice(BEGIN_NAME##tempv_t *tempv, size_t index, size_t n)                  \
+    BEGIN_NAME##tempv_t *BEGIN_NAME##tempv_cut(BEGIN_NAME##tempv_t *tempv, size_t index, size_t n)                  \
     {                                                                                                                  \
         BEGIN_NAME##tempv_t *ret;                                                                                      \
                                                                                                                        \
